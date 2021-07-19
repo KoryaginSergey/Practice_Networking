@@ -22,9 +22,12 @@ class ImageViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.title = navigationItemTitle
-        downloadImage()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        downloadImage()
+    }
     
     private func downloadImage() {
         
@@ -35,11 +38,11 @@ class ImageViewController: UIViewController {
         
         let session = URLSession.shared
         
-        session.dataTask(with: url) { (data, response, error) in
+        session.dataTask(with: url) { [weak self] (data, response, error) in
             if let data = data, let image = UIImage(data: data) {
                 DispatchQueue.main.async {
-                    self.imageView.image = image
-                    self.activityIndicator.stopAnimating()
+                    self?.imageView.image = image
+                    self?.activityIndicator.stopAnimating()
                 }
             }
         }.resume()

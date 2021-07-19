@@ -97,7 +97,7 @@
                                     <constraint firstAttribute="height" constant="100" id="Wev-fx-nCU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                                <state key="normal" title="ADD IMAGE ON INGUR">
+                                <state key="normal" title="ADD IMAGE ON IMGUR">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
