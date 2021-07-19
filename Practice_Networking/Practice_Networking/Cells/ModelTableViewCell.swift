@@ -12,9 +12,7 @@ import UIKit
 
 class ModelTableViewCell: UITableViewCell {
     
-    
     @IBOutlet weak var idLable: UILabel!
     @IBOutlet weak var titleLable: UILabel!
-    
     
 }

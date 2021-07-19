@@ -8,8 +8,8 @@
 
 import UIKit
 
+
 class AllDataViewController: UIViewController {
-    
     
     @IBOutlet private weak var tableView: UITableView!
     
@@ -19,18 +19,13 @@ class AllDataViewController: UIViewController {
     private let defaultHeightForRow: CGFloat = 100
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = navigationItemTitle
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
-//        models = [DataModel(id: 1, title: "string1"), DataModel(id: 2, title: "String2")]
     }
-    
-
 }
 
     //MARK: - Extensions

@@ -25,6 +25,7 @@ class ImageViewController: UIViewController {
         downloadImage()
     }
     
+    
     private func downloadImage() {
         
         guard let url = URL(string: "https://applelives.com/wp-content/uploads/2016/03/iPhone-SE-11.jpeg") else {return}
@@ -42,6 +43,6 @@ class ImageViewController: UIViewController {
                 }
             }
         }.resume()
-    
     }
+    
 }
