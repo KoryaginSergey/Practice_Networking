@@ -15,13 +15,12 @@ class ImageViewController: UIViewController {
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
-    private let navigationItemTitle = "Download Image"
-    
+    private let imagePath = "https://applelives.com/wp-content/uploads/2016/03/iPhone-SE-11.jpeg"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = navigationItemTitle
+       navigationItem.title = NavigationTitle.image.description
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,22 +29,17 @@ class ImageViewController: UIViewController {
     }
     
     private func downloadImage() {
-        
-        guard let url = URL(string: "https://applelives.com/wp-content/uploads/2016/03/iPhone-SE-11.jpeg") else {return}
-        
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         
-        let session = URLSession.shared
-        
-        session.dataTask(with: url) { [weak self] (data, response, error) in
+        NetworkManager.send(path: imagePath, method: RequestMethod.get.description, params: nil) { data, response, error in
             if let data = data, let image = UIImage(data: data) {
                 DispatchQueue.main.async {
-                    self?.imageView.image = image
-                    self?.activityIndicator.stopAnimating()
+                    self.imageView.image = image
+                    self.activityIndicator.stopAnimating()
                 }
             }
-        }.resume()
+        }
     }
     
 }

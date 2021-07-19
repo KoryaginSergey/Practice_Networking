@@ -12,15 +12,15 @@ import UIKit
 @available(iOS 13.0, *)
 class ViewController: UIViewController {
     
-    
     var dataModel = [DataModel]()
     var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     
+    let getPostRequestPath = "https://jsonplaceholder.typicode.com/posts"
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Network"
+        navigationItem.title = NavigationTitle.main.description
     }
     
     //MARK: - Actions
@@ -57,37 +57,22 @@ class ViewController: UIViewController {
     //MARK: - Private funcs
     
     private func callGetRequest() {
-        guard let url = URL(string: "https://jsonplaceholder.typicode.com/posts")
-            else {return}
         
-        let session = URLSession.shared
-        session.dataTask(with: url) { (data, response, error) in
+        NetworkManager.send(path: getPostRequestPath, method: RequestMethod.get.description, params: nil) { data, response, error in
             guard let _ = response, let data = data else {return}
             do {
                 self.dataModel = try JSONDecoder().decode([DataModel].self, from: data)
             } catch {
                 print(error)
             }
-        }.resume()
+        }
+        
     }
     
     private func callPostRequest() {
-        
-        guard let url = URL(string: "https://jsonplaceholder.typicode.com/posts")
-            else {return}
-        
         let userData = ["Course" : "Networking", "Task" : "GET and POST requests"]
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: userData, options: [])
-        else {return}
-        request.httpBody = httpBody
-        
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
+
+        NetworkManager.send(path: getPostRequestPath, method: RequestMethod.post.description, params: userData) { data, response, error in
             guard let _ = response, let data = data else {return}
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
@@ -95,7 +80,7 @@ class ViewController: UIViewController {
             } catch {
                 print(error)
             }
-        }.resume()
+        }
     }
     
     func sendToServer(data: Data) {

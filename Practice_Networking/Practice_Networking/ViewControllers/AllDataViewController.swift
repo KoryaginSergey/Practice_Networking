@@ -15,14 +15,13 @@ class AllDataViewController: UIViewController {
     
     var models = [DataModel]()
     private let cellID = String(describing: ModelTableViewCell.self)
-    private let navigationItemTitle = "All Data View Controller"
     private let defaultHeightForRow: CGFloat = 100
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = navigationItemTitle
+        navigationItem.title = NavigationTitle.all.description
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
